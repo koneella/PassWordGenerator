@@ -4,16 +4,26 @@ import java.util.Random;
 
 public class Password {
 
-    private static final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String big_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String small_chars = "abcdefghijklmnopqrstuvwxyz";
 
-    private String password = "";
+
 
     Random rand = new Random();
+    private String password = "";
 
 
-    public String generatePassword(int n) {
-        for (int i = 0; i < n; i++) {
-            password += chars.charAt(rand.nextInt(chars.length()));
+    public String generatePassword(int len, boolean use_big, boolean use_small) {
+
+        String charString = "";
+
+        if(use_big) charString += big_chars;
+        if(use_small) charString += small_chars;
+
+        char[] chars = charString.toCharArray();
+
+        for (int i = 0; i < len; i++) {
+            password += chars[rand.nextInt(charString.length())];
         }
         return password;
     }
