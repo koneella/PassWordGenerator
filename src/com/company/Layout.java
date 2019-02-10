@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 import net.miginfocom.swing.MigLayout;
 import sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl;
@@ -31,12 +32,16 @@ public class Layout extends JFrame implements ActionListener {
         b1 = new JButton("Generate a password.");
         b1.addActionListener(this);
 
+
         passwordShow = new JTextField(30);
         passwordShow.setEditable(false);
 
         checkBig = new JCheckBox();
+        checkBig.addActionListener(this);
         checkSmall = new JCheckBox();
+        checkSmall.addActionListener(this);
         checkNum = new JCheckBox();
+        checkNum.addActionListener(this);
 
         frame.add(b1, "wrap, span, center");
         frame.add(passwordShow, "wrap, span, center");
@@ -52,14 +57,12 @@ public class Layout extends JFrame implements ActionListener {
 
     }
 
+
+
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == b1 && checkBig.isSelected() ) {
-            displayPw(25, true, false, false);
-        } else if (e.getSource() == b1 && checkSmall.isSelected()) {
-            displayPw(25, false, true, false);
-        }else if (e.getSource() == b1 && checkBig.isSelected() && checkSmall.isSelected()) {
-            displayPw(25, true, true, false);
+        if (e.getSource() == b1) {
+            displayPw(25, checkBig.isSelected(), checkSmall.isSelected(), checkNum.isSelected());
         }
 
     }
